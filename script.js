@@ -43,7 +43,7 @@ function updateTable(data) {
       <td>${row.tugas}</td>
       <td>${row.uts}</td>
       <td>${row.finalProject}</td>
-      <td class="grade-cell ${gradeClass}">${row.nilaiAngka}</td>
+      <td class="grade-cell ${gradeClass}">${Math.round(row.nilaiAngka)}</td>
       <td class="grade-cell ${gradeClass}">${row.nilaiHuruf}</td>
     `;
     tbody.appendChild(tr);
