@@ -1,5 +1,5 @@
 // Ganti URL berikut dengan URL Web App dari Apps Script milikmu
-const scriptURL = 'https://script.google.com/macros/s/AKfycbxj4AgUfyK6Bur3zNMQCgphk6UmwddBmsRWQrRgMr-ambYWDFtmcLYD9wn81SGPGQD3/exec';
+const scriptURL = 'https://script.google.com/macros/s/AKfycbzkl760Ew_s1KjiYhsKzQs24NNR0xxN-7-re5xvaNy6V3OI4Rt0guhFBOfSAkN6TeQY/exec';
 let previousData = [];
 
 async function fetchGrades() {
@@ -43,7 +43,7 @@ function updateTable(data) {
       <td>${row.tugas}</td>
       <td>${row.uts}</td>
       <td>${row.finalProject}</td>
-      <td class="grade-cell ${gradeClass}">${Math.round(row.nilaiAngka)}</td>
+      <td class="grade-cell ${gradeClass}">${row.nilaiAngka}</td>
       <td class="grade-cell ${gradeClass}">${row.nilaiHuruf}</td>
     `;
     tbody.appendChild(tr);
