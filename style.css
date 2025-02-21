@@ -1,4 +1,4 @@
-/* Style Utama & Tema Dark */
+/* Global Dark Theme */
 body {
     background-color: #121212;
     color: #e0e0e0;
@@ -27,39 +27,36 @@ body {
     padding: 20px;
   }
   
-  /* Style Tabel & Efek 3D */
+  /* Table Styling */
   table {
     width: 100%;
     border-collapse: collapse;
-    perspective: 1000px;
   }
   
   th, td {
     padding: 12px;
     text-align: left;
     border-bottom: 1px solid #333;
-    transition: transform 0.3s ease, background-color 0.3s ease;
   }
   
   th {
     background-color: #1f1f1f;
   }
   
-  tr {
-    transform: translateZ(0);
-  }
-  
   tr:nth-child(even) {
     background-color: #1a1a1a;
   }
   
-  /* Efek hover 3D pada baris */
-  tr:hover {
-    transform: scale(1.02) translateZ(20px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  /* Hover Animation yang Lebih Lembut */
+  tr {
+    transition: background-color 0.3s ease;
   }
   
-  /* Animasi flash untuk update data */
+  tr:hover {
+    background-color: #2c2c2c;
+  }
+  
+  /* Animasi untuk Update Data */
   tr.updated {
     animation: flash 1s ease-out;
   }
@@ -68,26 +65,51 @@ body {
     100% { background-color: inherit; }
   }
   
-  /* Highlight khusus untuk kolom Nilai Angka dan Nilai Huruf */
-  td.grade-value {
-    background: linear-gradient(45deg, #00c853, #b9f6ca);
+  /* Styling untuk Kolom Nilai (angka & huruf) dengan warna berdasarkan grade */
+  td.grade-cell {
+    text-align: center;
+    font-weight: bold;
+    border-radius: 4px;
+    padding: 10px;
+  }
+  
+  /* Warna khusus untuk tiap grade */
+  .grade-A {
+    background-color: #2ecc71; /* Hijau */
     color: #000;
-    font-weight: bold;
-    text-align: center;
-    border-radius: 4px;
-    padding: 10px;
   }
   
-  td.grade-letter {
-    background: linear-gradient(45deg, #d500f9, #ea80fc);
+  .grade-AB {
+    background-color: #8bc34a; /* Hijau muda */
+    color: #000;
+  }
+  
+  .grade-B {
+    background-color: #00bcd4; /* Biru kehijauan */
     color: #fff;
-    font-weight: bold;
-    text-align: center;
-    border-radius: 4px;
-    padding: 10px;
   }
   
-  /* Responsif untuk perangkat kecil */
+  .grade-BC {
+    background-color: #ffc107; /* Kuning keemasan */
+    color: #000;
+  }
+  
+  .grade-C {
+    background-color: #ff9800; /* Oranye */
+    color: #fff;
+  }
+  
+  .grade-D {
+    background-color: #f57c00; /* Oranye tua */
+    color: #fff;
+  }
+  
+  .grade-E {
+    background-color: #e74c3c; /* Merah */
+    color: #fff;
+  }
+  
+  /* Responsif */
   @media (max-width: 600px) {
     th, td {
       padding: 8px;
