@@ -1,5 +1,5 @@
 // Ganti URL berikut dengan URL Web App dari Apps Script milikmu
-const scriptURL = 'https://script.google.com/macros/s/AKfycbzkl760Ew_s1KjiYhsKzQs24NNR0xxN-7-re5xvaNy6V3OI4Rt0guhFBOfSAkN6TeQY/exec';
+const scriptURL = 'https://script.google.com/macros/s/AKfycbxS3bNmH_6yqLY1bMWyZtjktVIKIgS70Pz069R1B1n7UvlyMX0YWTZ9A7apZCQu-svv/exec';
 let previousData = [];
 
 async function fetchGrades() {
