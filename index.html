@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Live Grades Dashboard</title>
+  <style>
+    /* Tema Dark dan Style Umum */
+    body {
+      background-color: #121212;
+      color: #ffffff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      padding: 20px;
+      text-align: center;
+      background-color: #1f1f1f;
+    }
+    h1 {
+      margin: 0;
+      font-size: 2em;
+    }
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 20px auto;
+      overflow-x: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #333;
+    }
+    th {
+      background-color: #1f1f1f;
+    }
+    tr:nth-child(even) {
+      background-color: #1a1a1a;
+    }
+    /* Efek animasi untuk update data */
+    tr.updated {
+      animation: flash 1s ease-out;
+    }
+    @keyframes flash {
+      0% { background-color: #ff9800; }
+      100% { background-color: inherit; }
+    }
+    /* Responsif untuk perangkat kecil */
+    @media (max-width: 600px) {
+      th, td {
+        padding: 8px;
+      }
+      h1 {
+        font-size: 1.5em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Live Grades Dashboard</h1>
+  </header>
+  <div class="container">
+    <table id="gradesTable">
+      <thead>
+        <tr>
+          <th>Nama Initial</th>
+          <th>NIM</th>
+          <th>Sikap & Kehadiran (20%)</th>
+          <th>Tugas (50%)</th>
+          <th>UTS (10%)</th>
+          <th>Final Project (20%)</th>
+          <th>Nilai Angka</th>
+          <th>Nilai Huruf</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Baris data akan dimuat di sini -->
+      </tbody>
+    </table>
+  </div>
+  <script>
+    // Ganti URL berikut dengan URL Web App dari Apps Script milikmu
+    const scriptURL = 'YOUR_APPS_SCRIPT_DEPLOY_URL_HERE';
+    let previousData = [];
+
+    async function fetchGrades() {
+      try {
+        const response = await fetch(scriptURL);
+        const data = await response.json();
+        updateTable(data);
+      } catch (error) {
+        console.error('Error fetching grades:', error);
+      }
+    }
+
+    function updateTable(data) {
+      const tbody = document.getElementById('gradesTable').querySelector('tbody');
+      tbody.innerHTML = ''; // Bersihkan tabel sebelum update
+
+      data.forEach((row, index) => {
+        const tr = document.createElement('tr');
+        // Cek apakah data berubah untuk menambahkan kelas animasi
+        if (previousData[index] && JSON.stringify(previousData[index]) !== JSON.stringify(row)) {
+          tr.classList.add('updated');
+        }
+        tr.innerHTML = `
+          <td>${row.nama}</td>
+          <td>${row.nim}</td>
+          <td>${row.sikap}</td>
+          <td>${row.tugas}</td>
+          <td>${row.uts}</td>
+          <td>${row.finalProject}</td>
+          <td>${row.nilaiAngka}</td>
+          <td>${row.nilaiHuruf}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+      previousData = data;
+    }
+
+    // Ambil data pertama kali dan lakukan polling setiap 10 detik
+    fetchGrades();
+    setInterval(fetchGrades, 10000);
+  </script>
+</body>
+</html>
