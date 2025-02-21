@@ -1,10 +1,12 @@
 // Ganti URL berikut dengan URL Web App dari Apps Script milikmu
-const scriptURL = 'https://script.google.com/macros/s/AKfycbyaBWBe3mlvWs5KUnIsUlvvaNpVBDmPo4zmOtzrc4PnrffEKstNDQ5shyd7plffTRTm/exec';
+const baseURL = 'https://script.google.com/macros/s/AKfycbz4Dkz4IxFVVjfMrZZHHyQphZiyNA9BlRgLvrEuHHhojXBoUskmGLCJJV4YKMsrUcWs/exec';
+// Set default sheet (DMJK)
+let currentSheet = "DMJK";
 let previousData = [];
 
 async function fetchGrades() {
   try {
-    const response = await fetch(scriptURL);
+    const response = await fetch(`${baseURL}?sheet=${currentSheet}`);
     const data = await response.json();
     updateTable(data);
   } catch (error) {
@@ -51,6 +53,17 @@ function updateTable(data) {
   previousData = data;
 }
 
-// Ambil data pertama kali dan lakukan polling setiap 10 detik
+// Tambahkan event listener untuk tombol pilihan MK
+document.querySelectorAll(".mk-selection button").forEach(button => {
+  button.addEventListener("click", () => {
+    currentSheet = button.getAttribute("data-sheet");
+    // Perbarui tampilan tombol aktif
+    document.querySelectorAll(".mk-selection button").forEach(btn => btn.classList.remove("active"));
+    button.classList.add("active");
+    fetchGrades();
+  });
+});
+
+// Panggil fetchGrades() secara periodik setiap 10 detik
 fetchGrades();
 setInterval(fetchGrades, 10000);

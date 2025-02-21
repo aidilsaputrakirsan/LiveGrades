@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Live Grades Dashboard</title>
-  <link rel="icon" href="icon.png" type="image/png">
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -12,6 +11,12 @@
     <h1>Live Grades Dashboard</h1>
   </header>
   <div class="container">
+    <!-- Pilihan Mata Kuliah -->
+    <div class="mk-selection">
+      <button data-sheet="DMJK" class="active">Desain dan Manajemen Jaringan Komputer</button>
+      <button data-sheet="Proweb">Pemrograman Web</button>
+      <button data-sheet="Cloud">Komputasi Awan</button>
+    </div>
     <table id="gradesTable">
       <thead>
         <tr>
@@ -26,7 +31,7 @@
         </tr>
       </thead>
       <tbody>
-        <!-- Data rows akan dimuat di sini -->
+        <!-- Data akan dimuat secara dinamis -->
       </tbody>
     </table>
   </div>
