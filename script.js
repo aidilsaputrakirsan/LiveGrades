@@ -18,10 +18,24 @@ function updateTable(data) {
 
   data.forEach((row, index) => {
     const tr = document.createElement('tr');
-    // Tambahkan kelas animasi jika ada perubahan data
+    // Tambahkan kelas animasi jika data berubah
     if (previousData[index] && JSON.stringify(previousData[index]) !== JSON.stringify(row)) {
       tr.classList.add('updated');
     }
+    
+    // Tentukan kelas berdasarkan nilai huruf
+    let gradeClass = '';
+    switch (row.nilaiHuruf) {
+      case 'A': gradeClass = 'grade-A'; break;
+      case 'AB': gradeClass = 'grade-AB'; break;
+      case 'B': gradeClass = 'grade-B'; break;
+      case 'BC': gradeClass = 'grade-BC'; break;
+      case 'C': gradeClass = 'grade-C'; break;
+      case 'D': gradeClass = 'grade-D'; break;
+      case 'E': gradeClass = 'grade-E'; break;
+      default: gradeClass = '';
+    }
+    
     tr.innerHTML = `
       <td>${row.nama}</td>
       <td>${row.nim}</td>
@@ -29,8 +43,8 @@ function updateTable(data) {
       <td>${row.tugas}</td>
       <td>${row.uts}</td>
       <td>${row.finalProject}</td>
-      <td class="grade-value">${row.nilaiAngka}</td>
-      <td class="grade-letter">${row.nilaiHuruf}</td>
+      <td class="grade-cell ${gradeClass}">${row.nilaiAngka}</td>
+      <td class="grade-cell ${gradeClass}">${row.nilaiHuruf}</td>
     `;
     tbody.appendChild(tr);
   });
