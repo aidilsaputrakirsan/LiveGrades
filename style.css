@@ -1,0 +1,99 @@
+/* Style Utama & Tema Dark */
+body {
+    background-color: #121212;
+    color: #e0e0e0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  header {
+    padding: 20px;
+    text-align: center;
+    background: linear-gradient(45deg, #1f1f1f, #333);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  }
+  
+  h1 {
+    margin: 0;
+    font-size: 2em;
+  }
+  
+  .container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
+    overflow-x: auto;
+    padding: 20px;
+  }
+  
+  /* Style Tabel & Efek 3D */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    perspective: 1000px;
+  }
+  
+  th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #333;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+  }
+  
+  th {
+    background-color: #1f1f1f;
+  }
+  
+  tr {
+    transform: translateZ(0);
+  }
+  
+  tr:nth-child(even) {
+    background-color: #1a1a1a;
+  }
+  
+  /* Efek hover 3D pada baris */
+  tr:hover {
+    transform: scale(1.02) translateZ(20px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  }
+  
+  /* Animasi flash untuk update data */
+  tr.updated {
+    animation: flash 1s ease-out;
+  }
+  @keyframes flash {
+    0% { background-color: #ff9800; }
+    100% { background-color: inherit; }
+  }
+  
+  /* Highlight khusus untuk kolom Nilai Angka dan Nilai Huruf */
+  td.grade-value {
+    background: linear-gradient(45deg, #00c853, #b9f6ca);
+    color: #000;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 4px;
+    padding: 10px;
+  }
+  
+  td.grade-letter {
+    background: linear-gradient(45deg, #d500f9, #ea80fc);
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 4px;
+    padding: 10px;
+  }
+  
+  /* Responsif untuk perangkat kecil */
+  @media (max-width: 600px) {
+    th, td {
+      padding: 8px;
+    }
+    h1 {
+      font-size: 1.5em;
+    }
+  }
+  
