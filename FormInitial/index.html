@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Form Kirim Data ke Google Spreadsheet</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #2b2b2b; 
+      color: #fff;
+      margin: 20px;
+    }
+    .container {
+      max-width: 400px;
+      margin: auto;
+      background: #3b3b3b;
+      padding: 20px;
+      border-radius: 5px;
+    }
+    h1 {
+      text-align: center;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: none;
+      border-radius: 4px;
+      background: #555;
+      color: #fff;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 15px;
+      background: #ff6a00;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    button:hover {
+      background: #ff3a00;
+    }
+    .status {
+      margin-top: 20px;
+      font-weight: bold;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Kirim Data</h1>
+    <form id="myForm">
+      <label for="namaLengkap">Nama Lengkap:</label>
+      <input type="text" id="namaLengkap" name="namaLengkap" required>
+      
+      <label for="namaInitial">Nama Initial:</label>
+      <input type="text" id="namaInitial" name="namaInitial" required>
+
+      <button type="submit">Submit</button>
+    </form>
+
+    <div id="status" class="status"></div>
+  </div>
+
+  <script>
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbw3y6A8dy4veJlANx1xdbr4T6okpXp8Zs4PbS9mKkuD9EV4SPu8PAAylWp3cBh9W2bM/exec"; 
+    // Ganti dengan URL Web App Anda
+
+    const form = document.getElementById('myForm');
+    const statusDiv = document.getElementById('status');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      // Ambil data input
+      const namaLengkap = document.getElementById('namaLengkap').value;
+      const namaInitial = document.getElementById('namaInitial').value;
+
+      // Reset status
+      statusDiv.textContent = "Mengirim data...";
+
+      // Kirim data via fetch (POST JSON)
+      fetch(WEB_APP_URL, {
+        method: "POST",
+        mode: "cors", // penting agar bisa lintas domain
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          namaLengkap: namaLengkap,
+          namaInitial: namaInitial
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        // Tampilkan respons
+        if(data.status === "success") {
+          statusDiv.textContent = data.message;
+          form.reset(); // bersihkan form
+        } else {
+          statusDiv.textContent = "Error: " + data.message;
+        }
+      })
+      .catch(error => {
+        console.error("Fetch error:", error);
+        statusDiv.textContent = "Fetch error: " + error;
+      });
+    });
+  </script>
+</body>
+</html>
