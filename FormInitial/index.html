@@ -1,24 +1,29 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>Form Kirim Data ke Google Spreadsheet</title>
+  <title>Form Input Initial</title>
+  <!-- Supaya responsif di mobile -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
   <style>
     body {
       font-family: Arial, sans-serif;
       background: #2b2b2b; 
       color: #fff;
-      margin: 20px;
+      margin: 0;
+      padding: 0;
     }
     .container {
       max-width: 400px;
-      margin: auto;
+      margin: 20px auto; /* 20px top-bottom, auto left-right */
       background: #3b3b3b;
       padding: 20px;
       border-radius: 5px;
     }
     h1 {
       text-align: center;
+      margin: 0 0 20px 0;
     }
     label {
       display: block;
@@ -33,15 +38,18 @@
       border-radius: 4px;
       background: #555;
       color: #fff;
+      font-size: 16px;
     }
     button {
       margin-top: 20px;
-      padding: 10px 15px;
+      padding: 12px;
       background: #ff6a00;
       color: #fff;
       border: none;
       cursor: pointer;
       border-radius: 4px;
+      width: 100%;
+      font-size: 16px;
     }
     button:hover {
       background: #ff3a00;
@@ -50,6 +58,19 @@
       margin-top: 20px;
       font-weight: bold;
       text-align: center;
+      min-height: 20px; /* Biar form tidak "lompat" */
+    }
+
+    /* Contoh Media Query (opsional) 
+       Untuk layar sempit (di bawah 350px), kecilkan font */
+    @media only screen and (max-width: 350px) {
+      h1 {
+        font-size: 18px;
+      }
+      button {
+        font-size: 14px;
+        padding: 10px;
+      }
     }
   </style>
 </head>
@@ -70,26 +91,24 @@
   </div>
 
   <script>
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbw3y6A8dy4veJlANx1xdbr4T6okpXp8Zs4PbS9mKkuD9EV4SPu8PAAylWp3cBh9W2bM/exec"; 
-    // Ganti dengan URL Web App Anda
-
+    // Ganti dengan URL Web App (Deploy as "Anyone" can access)
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbw3y6A8dy4veJlANx1xdbr4T6okpXp8Zs4PbS9mKkuD9EV4SPu8PAAylWp3cBh9W2bM/exec";
+    
     const form = document.getElementById('myForm');
     const statusDiv = document.getElementById('status');
 
     form.addEventListener('submit', function(e) {
       e.preventDefault();
+      statusDiv.textContent = "Mengirim data...";
 
       // Ambil data input
       const namaLengkap = document.getElementById('namaLengkap').value;
       const namaInitial = document.getElementById('namaInitial').value;
 
-      // Reset status
-      statusDiv.textContent = "Mengirim data...";
-
       // Kirim data via fetch (POST JSON)
       fetch(WEB_APP_URL, {
         method: "POST",
-        mode: "cors", // penting agar bisa lintas domain
+        mode: "cors", 
         headers: {
           "Content-Type": "application/json"
         },
@@ -98,12 +117,17 @@
           namaInitial: namaInitial
         })
       })
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) {
+          // Jika HTTP status bukan 2xx
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
       .then(data => {
-        // Tampilkan respons
-        if(data.status === "success") {
-          statusDiv.textContent = data.message;
-          form.reset(); // bersihkan form
+        if (data.status === "success") {
+          statusDiv.textContent = data.message; // "Data berhasil disimpan!"
+          form.reset(); 
         } else {
           statusDiv.textContent = "Error: " + data.message;
         }
