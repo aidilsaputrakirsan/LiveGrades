@@ -300,11 +300,10 @@ header h1 {
   100% { box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); }
 }
 
-/* Table Styles - UPDATED */
-#gradesTable {
-  table-layout: fixed;
+/* Table Styles */
+table {
   width: 100%;
-  border-collapse: separate;
+  border-collapse: collapse;
   border-spacing: 0;
 }
 
@@ -325,18 +324,16 @@ th {
 }
 
 th.col-name {
-  width: 15%;
   text-align: center;
+  width: 20%;
 }
 
 th.col-sikap, th.col-tugas, th.col-uts, th.col-project {
   width: 15%;
-  text-align: center;
 }
 
 th.col-angka, th.col-huruf {
   width: 10%;
-  text-align: center;
 }
 
 th::after {
@@ -362,23 +359,18 @@ th .weight {
   font-size: 0.8rem;
 }
 
-/* Table cells - UPDATED */
+/* Table cells */
 td {
-  padding: var(--spacing-md) var(--spacing-sm);
+  padding: var(--spacing-md);
   border-bottom: 1px solid var(--border-color);
   transition: all var(--transition-medium) ease;
   text-align: center;
-  vertical-align: middle;
-  border-right: 1px solid rgba(71, 85, 105, 0.3);
 }
 
-td:last-child {
-  border-right: none;
-}
-
-/* Name cell - UPDATED */
-.name-cell {
+/* Name cell */
+td.name-cell {
   text-align: center;
+  vertical-align: middle;
 }
 
 .name-content {
@@ -387,6 +379,7 @@ td:last-child {
   align-items: center;
   justify-content: center;
   gap: 5px;
+  width: 100%;
 }
 
 /* Position badges */
@@ -407,15 +400,10 @@ td:last-child {
   color: white;
 }
 
-/* Student name - UPDATED */
+/* Student name */
 .student-name {
   font-weight: 600;
   display: block;
-  padding: 4px 8px;
-  border-radius: 4px;
-  background: var(--bg-tertiary);
-  min-width: 60px;
-  text-align: center;
 }
 
 .highlight-change {
@@ -427,7 +415,7 @@ td:last-child {
   50% { color: var(--highlight); }
 }
 
-/* Component cells with progress bars - UPDATED */
+/* Component cells with progress bars */
 .component-cell {
   vertical-align: middle;
 }
@@ -438,7 +426,7 @@ td:last-child {
   flex-direction: column;
   gap: 0.25rem;
   margin: 0 auto;
-  max-width: 120px;
+  max-width: 100%;
 }
 
 .progress-value {
@@ -449,7 +437,7 @@ td:last-child {
 }
 
 .progress-bar {
-  height: 8px;
+  height: 6px;
   width: 100%;
   background: var(--bg-tertiary);
   border-radius: 3px;
@@ -491,15 +479,10 @@ td:last-child {
 .progress-fill.below-average { background: var(--below-average); }
 .progress-fill.poor { background: var(--poor); }
 
-/* Grade cells - UPDATED */
+/* Grade cells */
 .grade-numeric, .grade-letter {
   font-weight: 700;
-  text-align: center;
-  border-radius: 4px;
-  padding: 4px;
-  margin: 0 auto;
-  width: 50px;
-  display: block;
+  vertical-align: middle;
 }
 
 .grade-numeric {
@@ -542,7 +525,7 @@ td:last-child {
 .grade-D { color: var(--grade-d); }
 .grade-E { color: var(--grade-e); }
 
-/* Table rows - UPDATED */
+/* Table rows */
 tbody tr {
   background: var(--bg-secondary);
   position: relative;
@@ -551,11 +534,6 @@ tbody tr {
   opacity: 0;
   transform: translateY(10px);
   height: 80px;
-}
-
-/* Zebra striping for rows */
-tbody tr:nth-child(even) {
-  background: rgba(30, 41, 59, 0.6);
 }
 
 @keyframes fadeIn {
@@ -806,15 +784,6 @@ footer::before {
   }
   
   .grade-letter {
-    font-size: 0.9rem;
-  }
-  
-  .progress-container {
-    max-width: 100%;
-  }
-  
-  .student-name {
-    min-width: 40px;
     font-size: 0.9rem;
   }
 }
