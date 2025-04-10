@@ -141,8 +141,10 @@ function updateTable(data) {
     
     tr.innerHTML = `
       <td class="student-name">
-        ${positionLabel}
-        <span class="${hasChanges ? 'highlight-change' : ''}">${row.nama}</span>
+        <div class="student-info">
+          ${positionLabel}
+          <span class="student-name-text ${hasChanges ? 'highlight-change' : ''}">${row.nama}</span>
+        </div>
       </td>
       <td class="component-cell">${sikapBar}</td>
       <td class="component-cell">${tugasBar}</td>
