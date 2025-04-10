@@ -67,7 +67,7 @@ async function fetchGrades() {
     updateLastUpdateTime();
     
     // Tambahkan efek refresh
-    const tableContainer = document.querySelector('.table-container');
+    const tableContainer = document.querySelector('.grades-table-container');
     tableContainer.classList.add('refreshed');
     setTimeout(() => tableContainer.classList.remove('refreshed'), 1000);
     
@@ -140,10 +140,10 @@ function updateTable(data) {
     const finalProjectBar = createProgressBar(row.finalProject, 100, getProgressBarClass(row.finalProject));
     
     tr.innerHTML = `
-      <td class="student-name">
-        <div class="student-info">
+      <td class="name-cell">
+        <div class="name-content">
           ${positionLabel}
-          <span class="student-name-text ${hasChanges ? 'highlight-change' : ''}">${row.nama}</span>
+          <span class="student-name ${hasChanges ? 'highlight-change' : ''}">${row.nama}</span>
         </div>
       </td>
       <td class="component-cell">${sikapBar}</td>

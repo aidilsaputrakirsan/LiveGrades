@@ -1,4 +1,4 @@
-/* Modern Professional Dark Theme with Advanced Animations */
+/* Global Dark Theme with Animated Gradient Background */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
 :root {
@@ -291,8 +291,8 @@ header h1 {
   font-size: 0.8rem;
 }
 
-/* Table Container */
-.table-container {
+/* Grades Table Container */
+.grades-table-container {
   background: var(--bg-secondary);
   border-radius: 0.75rem;
   overflow: hidden;
@@ -303,17 +303,17 @@ header h1 {
   position: relative;
 }
 
-.table-responsive {
+.table-wrapper {
   width: 100%;
   overflow-x: auto;
 }
 
-.table-container:hover {
+.grades-table-container:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
 }
 
-.table-container.refreshed {
+.grades-table-container.refreshed {
   animation: refreshGlow 1s ease-out;
 }
 
@@ -326,11 +326,8 @@ header h1 {
 /* Table Styles */
 table {
   width: 100%;
-  table-layout: fixed;
   border-collapse: separate;
   border-spacing: 0;
-  margin: 0;
-  padding: 0;
 }
 
 thead {
@@ -342,25 +339,11 @@ thead {
 
 th {
   padding: var(--spacing-md);
-  text-align: center !important;
+  text-align: center;
   font-weight: 600;
   color: var(--text-primary);
   border-bottom: 2px solid var(--border-color);
   position: relative;
-  overflow: hidden;
-}
-
-th:first-child {
-  text-align: left !important;
-  width: 15%;
-}
-
-th:nth-child(2), th:nth-child(3), th:nth-child(4), th:nth-child(5) {
-  width: 15%;
-}
-
-th:nth-child(6), th:nth-child(7) {
-  width: 10%;
 }
 
 th::after {
@@ -386,17 +369,183 @@ th .weight {
   font-size: 0.8rem;
 }
 
+/* Column widths */
+.col-name { 
+  width: 15%; 
+  text-align: left;
+}
+.col-sikap, .col-tugas, .col-uts, .col-project { 
+  width: 15%; 
+}
+.col-angka, .col-huruf { 
+  width: 10%; 
+}
+
+/* Table cells */
 td {
   padding: var(--spacing-md);
   border-bottom: 1px solid var(--border-color);
   transition: all var(--transition-medium) ease;
-  text-align: center !important;
+  text-align: center;
 }
 
-td:first-child {
-  text-align: left !important;
+/* Name cell */
+td.name-cell {
+  text-align: left;
+  vertical-align: middle;
 }
 
+.name-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+}
+
+/* Position badges */
+.position-badge {
+  font-size: 0.7rem;
+  padding: 0.15rem 0.4rem;
+  border-radius: 3px;
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+  display: inline-block;
+  min-width: 45px;
+  text-align: center;
+  margin-bottom: 4px;
+}
+
+.position-badge.top {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: white;
+}
+
+/* Student name */
+.student-name {
+  font-weight: 600;
+  display: block;
+}
+
+.highlight-change {
+  animation: highlightText 2s ease;
+}
+
+@keyframes highlightText {
+  0%, 100% { color: var(--text-primary); }
+  50% { color: var(--highlight); }
+}
+
+/* Component cells with progress bars */
+.component-cell {
+  vertical-align: middle;
+}
+
+.progress-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+.progress-value {
+  font-weight: 500;
+  text-align: center;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+}
+
+.progress-bar {
+  height: 6px;
+  width: 100%;
+  background: var(--bg-tertiary);
+  border-radius: 3px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-fill {
+  height: 100%;
+  transition: width 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  border-radius: 3px;
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, 
+    rgba(255, 255, 255, 0.1) 0%, 
+    rgba(255, 255, 255, 0.2) 50%, 
+    rgba(255, 255, 255, 0.1) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -100% 0; }
+  100% { background-position: 100% 0; }
+}
+
+.progress-fill.excellent { background: var(--excellent); }
+.progress-fill.good { background: var(--good); }
+.progress-fill.average { background: var(--average); }
+.progress-fill.below-average { background: var(--below-average); }
+.progress-fill.poor { background: var(--poor); }
+
+/* Grade cells */
+.grade-numeric, .grade-letter {
+  font-weight: 700;
+  vertical-align: middle;
+}
+
+.grade-numeric {
+  font-size: 1.2rem;
+}
+
+.grade-letter {
+  font-size: 1.1rem;
+}
+
+.grade-A, .grade-AB, .grade-B, .grade-BC, .grade-C, .grade-D, .grade-E {
+  position: relative;
+}
+
+.grade-A::after, .grade-AB::after, .grade-B::after, .grade-BC::after, 
+.grade-C::after, .grade-D::after, .grade-E::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.15;
+  z-index: -1;
+}
+
+.grade-A::after { background: var(--grade-a); }
+.grade-AB::after { background: var(--grade-ab); }
+.grade-B::after { background: var(--grade-b); }
+.grade-BC::after { background: var(--grade-bc); }
+.grade-C::after { background: var(--grade-c); }
+.grade-D::after { background: var(--grade-d); }
+.grade-E::after { background: var(--grade-e); }
+
+.grade-A { color: var(--grade-a); }
+.grade-AB { color: var(--grade-ab); }
+.grade-B { color: var(--grade-b); }
+.grade-BC { color: var(--grade-bc); }
+.grade-C { color: var(--grade-c); }
+.grade-D { color: var(--grade-d); }
+.grade-E { color: var(--grade-e); }
+
+/* Table rows */
 tbody tr {
   background: var(--bg-secondary);
   position: relative;
@@ -506,169 +655,6 @@ tr.value-decreased::after {
   0% { transform: translateX(-100%); }
   100% { transform: translateX(100%); }
 }
-
-/* Student name cell */
-.student-name {
-  font-weight: 600;
-  position: relative;
-  color: var(--text-primary);
-  width: 15%;
-  padding: var(--spacing-md);
-  text-align: left !important;
-}
-
-.student-info {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 5px;
-}
-
-.student-name-text {
-  display: block;
-  margin-top: 5px;
-}
-
-.highlight-change {
-  animation: highlightText 2s ease;
-}
-
-@keyframes highlightText {
-  0%, 100% { color: var(--text-primary); }
-  50% { color: var(--highlight); }
-}
-
-.position-badge {
-  font-size: 0.7rem;
-  padding: 0.15rem 0.4rem;
-  border-radius: 3px;
-  background: var(--bg-tertiary);
-  color: var(--text-secondary);
-  display: inline-block;
-  min-width: 45px;
-  text-align: center;
-}
-
-.position-badge.top {
-  background: linear-gradient(135deg, #f59e0b, #d97706);
-  color: white;
-}
-
-/* Component cells with progress bars */
-.component-cell {
-  width: 15%;
-  padding: var(--spacing-md) var(--spacing-sm);
-  text-align: center !important;
-}
-
-.progress-container {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  margin: 0 auto;
-}
-
-.progress-value {
-  font-weight: 500;
-  text-align: center;
-  color: var(--text-secondary);
-  margin-bottom: 4px;
-}
-
-.progress-bar {
-  height: 6px;
-  width: 100%;
-  background: var(--bg-tertiary);
-  border-radius: 3px;
-  overflow: hidden;
-  position: relative;
-  max-width: 100%;
-}
-
-.progress-fill {
-  height: 100%;
-  transition: width 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  border-radius: 3px;
-  position: relative;
-  overflow: hidden;
-}
-
-.progress-fill::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(90deg, 
-    rgba(255, 255, 255, 0.1) 0%, 
-    rgba(255, 255, 255, 0.2) 50%, 
-    rgba(255, 255, 255, 0.1) 100%);
-  background-size: 200% 100%;
-  animation: shimmer 2s infinite;
-}
-
-@keyframes shimmer {
-  0% { background-position: -100% 0; }
-  100% { background-position: 100% 0; }
-}
-
-.progress-fill.excellent { background: var(--excellent); }
-.progress-fill.good { background: var(--good); }
-.progress-fill.average { background: var(--average); }
-.progress-fill.below-average { background: var(--below-average); }
-.progress-fill.poor { background: var(--poor); }
-
-/* Grade cells */
-.grade-numeric, .grade-letter {
-  text-align: center !important;
-  font-weight: 700;
-  width: 10%;
-  position: relative;
-  overflow: hidden;
-  border-radius: 0.25rem;
-}
-
-.grade-numeric {
-  font-size: 1.2rem;
-}
-
-.grade-letter {
-  font-size: 1.1rem;
-}
-
-.grade-A, .grade-AB, .grade-B, .grade-BC, .grade-C, .grade-D, .grade-E {
-  position: relative;
-}
-
-.grade-A::after, .grade-AB::after, .grade-B::after, .grade-BC::after, 
-.grade-C::after, .grade-D::after, .grade-E::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  opacity: 0.15;
-  z-index: -1;
-}
-
-.grade-A::after { background: var(--grade-a); }
-.grade-AB::after { background: var(--grade-ab); }
-.grade-B::after { background: var(--grade-b); }
-.grade-BC::after { background: var(--grade-bc); }
-.grade-C::after { background: var(--grade-c); }
-.grade-D::after { background: var(--grade-d); }
-.grade-E::after { background: var(--grade-e); }
-
-.grade-A { color: var(--grade-a); }
-.grade-AB { color: var(--grade-ab); }
-.grade-B { color: var(--grade-b); }
-.grade-BC { color: var(--grade-bc); }
-.grade-C { color: var(--grade-c); }
-.grade-D { color: var(--grade-d); }
-.grade-E { color: var(--grade-e); }
 
 /* Grade Distribution Section */
 .grade-distribution {
