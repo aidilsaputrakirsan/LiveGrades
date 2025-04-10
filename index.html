@@ -6,36 +6,125 @@
   <title>Live Grades Dashboard</title>
   <link rel="icon" href="icon.png" type="image/png">
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
 <body>
-  <header>
-    <h1>Live Grades Dashboard</h1>
-  </header>
-  <div class="container">
-    <!-- Pilihan Mata Kuliah -->
-    <div class="mk-selection">
-      <button data-sheet="DMJK" class="active">Desain dan Manajemen Jaringan Komputer</button>
-      <button data-sheet="Proweb">Pemrograman Web</button>
-      <button data-sheet="Cloud">Komputasi Awan</button>
-    </div>
-    <table id="gradesTable">
-      <thead>
-        <tr>
-          <th>Nama Initial</th>
-          <th>NIM</th>
-          <th>Sikap &amp; Kehadiran (20%)</th>
-          <th>Tugas (50%)</th>
-          <th>UTS (10%)</th>
-          <th>Final Project (20%)</th>
-          <th>Nilai Angka</th>
-          <th>Nilai Huruf</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Data akan dimuat secara dinamis -->
-      </tbody>
-    </table>
+  <div class="performance-stats">
+    <div class="stat"><i class="fas fa-tachometer-alt"></i> <span id="fps">FPS N/A</span></div>
+    <div class="stat"><i class="fas fa-microchip"></i> GPU <span id="gpu">22%</span></div>
+    <div class="stat"><i class="fas fa-server"></i> CPU <span id="cpu">36%</span></div>
   </div>
+
+  <div class="page-container">
+    <header>
+      <h1><i class="fas fa-graduation-cap pulse"></i> Live Grades Dashboard</h1>
+      <div class="header-animation"></div>
+    </header>
+
+    <div class="container">
+      <!-- Course Selection -->
+      <div class="course-selection">
+        <button data-sheet="DMJK" class="active"><i class="fas fa-network-wired"></i> Desain dan Manajemen Jaringan Komputer</button>
+        <button data-sheet="Proweb"><i class="fas fa-code"></i> Pemrograman Web</button>
+        <button data-sheet="Cloud"><i class="fas fa-cloud"></i> Komputasi Awan</button>
+      </div>
+
+      <div class="data-status">
+        <div class="pulse-icon"><i class="fas fa-sync-alt fa-spin"></i></div>
+        <span>Live data refreshes every 10 seconds</span>
+        <div class="last-update">Last update: <span id="lastUpdateTime">Just now</span></div>
+      </div>
+
+      <div class="table-container">
+        <table id="gradesTable">
+          <thead>
+            <tr>
+              <th>Nama Initial</th>
+              <th>Sikap &amp; Kehadiran <span class="weight">(20%)</span></th>
+              <th>Tugas <span class="weight">(50%)</span></th>
+              <th>UTS <span class="weight">(10%)</span></th>
+              <th>Final Project <span class="weight">(20%)</span></th>
+              <th>Nilai Angka</th>
+              <th>Nilai Huruf</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Data will be loaded dynamically -->
+            <tr class="loading-row">
+              <td colspan="7">
+                <div class="loading-animation">
+                  <div class="loading-circle"></div>
+                  <div class="loading-circle"></div>
+                  <div class="loading-circle"></div>
+                </div>
+                <div class="loading-text">Loading grades...</div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="grade-distribution">
+        <h3><i class="fas fa-chart-pie"></i> Grade Distribution</h3>
+        <div class="grade-bars">
+          <div class="grade-bar">
+            <div class="label">A</div>
+            <div class="bar">
+              <div class="fill a-grade" id="gradeA-count" style="width: 0%"></div>
+            </div>
+            <div class="count" id="gradeA">0</div>
+          </div>
+          <div class="grade-bar">
+            <div class="label">AB</div>
+            <div class="bar">
+              <div class="fill ab-grade" id="gradeAB-count" style="width: 0%"></div>
+            </div>
+            <div class="count" id="gradeAB">0</div>
+          </div>
+          <div class="grade-bar">
+            <div class="label">B</div>
+            <div class="bar">
+              <div class="fill b-grade" id="gradeB-count" style="width: 0%"></div>
+            </div>
+            <div class="count" id="gradeB">0</div>
+          </div>
+          <div class="grade-bar">
+            <div class="label">BC</div>
+            <div class="bar">
+              <div class="fill bc-grade" id="gradeBC-count" style="width: 0%"></div>
+            </div>
+            <div class="count" id="gradeBC">0</div>
+          </div>
+          <div class="grade-bar">
+            <div class="label">C</div>
+            <div class="bar">
+              <div class="fill c-grade" id="gradeC-count" style="width: 0%"></div>
+            </div>
+            <div class="count" id="gradeC">0</div>
+          </div>
+          <div class="grade-bar">
+            <div class="label">D</div>
+            <div class="bar">
+              <div class="fill d-grade" id="gradeD-count" style="width: 0%"></div>
+            </div>
+            <div class="count" id="gradeD">0</div>
+          </div>
+          <div class="grade-bar">
+            <div class="label">E</div>
+            <div class="bar">
+              <div class="fill e-grade" id="gradeE-count" style="width: 0%"></div>
+            </div>
+            <div class="count" id="gradeE">0</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>&copy; 2025 Live Grades Dashboard | <i class="fas fa-cog fa-spin"></i> Realtime Data Updates</p>
+    </footer>
+  </div>
+
   <script src="script.js"></script>
 </body>
 </html>
