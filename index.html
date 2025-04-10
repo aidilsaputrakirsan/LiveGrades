@@ -7,12 +7,12 @@
   <link rel="icon" href="icon.png" type="image/png">
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <div class="page-container">
     <header>
-      <h1><i class="fas fa-graduation-cap pulse"></i> Live Grades Dashboard</h1>
-      <div class="header-animation"></div>
+      <h1><i class="fas fa-graduation-cap"></i> Live Grades Dashboard</h1>
     </header>
 
     <div class="container">
@@ -24,23 +24,83 @@
       </div>
 
       <div class="data-status">
-        <div class="pulse-icon"><i class="fas fa-sync-alt fa-spin"></i></div>
+        <div class="sync-button" title="Refresh data">
+          <i class="fas fa-sync-alt"></i>
+        </div>
         <span>Live data refreshes every 5 minutes</span>
         <div class="last-update">Last update: <span id="lastUpdateTime">Just now</span></div>
       </div>
 
-      <div class="grades-table-container">
+      <!-- Dashboard Summary -->
+      <div class="dashboard-summary">
+        <div class="summary-card">
+          <div class="card-icon"><i class="fas fa-users"></i></div>
+          <div class="card-content">
+            <h3>Total Students</h3>
+            <p id="totalStudents">0</p>
+          </div>
+        </div>
+        <div class="summary-card">
+          <div class="card-icon"><i class="fas fa-trophy"></i></div>
+          <div class="card-content">
+            <h3>Top Score</h3>
+            <p id="topScore">0</p>
+          </div>
+        </div>
+        <div class="summary-card">
+          <div class="card-icon"><i class="fas fa-calculator"></i></div>
+          <div class="card-content">
+            <h3>Average Score</h3>
+            <p id="averageScore">0</p>
+          </div>
+        </div>
+        <div class="summary-card">
+          <div class="card-icon"><i class="fas fa-check-circle"></i></div>
+          <div class="card-content">
+            <h3>Passing Rate</h3>
+            <p id="passingRate">0%</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chart Section -->
+      <div class="charts-container">
+        <div class="chart-card">
+          <h3><i class="fas fa-chart-pie"></i> Grade Distribution</h3>
+          <div class="chart-area">
+            <canvas id="gradeDistributionChart"></canvas>
+          </div>
+        </div>
+        <div class="chart-card">
+          <h3><i class="fas fa-chart-bar"></i> Component Averages</h3>
+          <div class="chart-area">
+            <canvas id="componentAveragesChart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grades Table -->
+      <div class="section-heading">
+        <h2><i class="fas fa-table"></i> Detailed Grades</h2>
+        <div class="view-toggle">
+          <button id="tableViewBtn" class="active"><i class="fas fa-list"></i> Table</button>
+          <button id="cardViewBtn"><i class="fas fa-th"></i> Cards</button>
+        </div>
+      </div>
+
+      <!-- Table View -->
+      <div id="tableView" class="grades-table-container">
         <div class="table-wrapper">
           <table id="gradesTable">
             <thead>
               <tr>
-                <th class="col-name">Nama Initial</th>
-                <th class="col-sikap">Sikap &amp; Kehadiran <span class="weight">(20%)</span></th>
-                <th class="col-tugas">Tugas <span class="weight">(50%)</span></th>
-                <th class="col-uts">UTS <span class="weight">(10%)</span></th>
-                <th class="col-project">Final Project <span class="weight">(20%)</span></th>
-                <th class="col-angka">Nilai Angka</th>
-                <th class="col-huruf">Nilai Huruf</th>
+                <th>Nama Initial</th>
+                <th>Sikap & Kehadiran <span class="weight">(20%)</span></th>
+                <th>Tugas <span class="weight">(50%)</span></th>
+                <th>UTS <span class="weight">(10%)</span></th>
+                <th>Final Project <span class="weight">(20%)</span></th>
+                <th>Nilai Angka</th>
+                <th>Nilai Huruf</th>
               </tr>
             </thead>
             <tbody>
@@ -60,8 +120,24 @@
         </div>
       </div>
 
+      <!-- Card View -->
+      <div id="cardView" class="grades-cards-container" style="display:none">
+        <div class="cards-grid" id="gradesCards">
+          <!-- Cards will be loaded dynamically -->
+          <div class="loading-container">
+            <div class="loading-animation">
+              <div class="loading-circle"></div>
+              <div class="loading-circle"></div>
+              <div class="loading-circle"></div>
+            </div>
+            <div class="loading-text">Loading grades...</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Score Distribution -->
       <div class="grade-distribution">
-        <h3><i class="fas fa-chart-pie"></i> Grade Distribution</h3>
+        <h3><i class="fas fa-chart-line"></i> Grade Distribution</h3>
         <div class="grade-bars">
           <div class="grade-bar">
             <div class="label">A</div>
