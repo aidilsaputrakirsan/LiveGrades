@@ -1,5 +1,5 @@
 // URL dari Web App yang dihosting di Google Apps Script
-const baseURL = 'https://script.google.com/macros/s/AKfycbz4Dkz4IxFVVjfMrZZHHyQphZiyNA9BlRgLvrEuHHhojXBoUskmGLCJJV4YKMsrUcWs/exec';
+const baseURL = 'https://script.google.com/macros/s/AKfycbwUi3QuDQE5s2HRMuoGJdjG346YAPiHcm5t1Lzx5h4PxKkcSAAUC1oTlPHyKzFs4sRQ/exec';
 
 // Variabel global
 let currentSheet = "DMJK"; // Sheet default (DMJK)
@@ -9,6 +9,7 @@ let gradeDistribution = {
 };
 let updateCounter = 0;
 let lastUpdateTime = new Date();
+const REFRESH_INTERVAL = 5 * 60 * 1000; // 5 menit dalam milidetik
 
 // Fungsi untuk memformat waktu terakhir update
 function formatLastUpdate() {
@@ -264,21 +265,16 @@ document.querySelectorAll(".course-selection button").forEach(button => {
   });
 });
 
-// Simulasi FPS counter
-function updatePerformanceStats() {
-  document.getElementById('fps').textContent = `FPS ${Math.floor(55 + Math.random() * 5)}`;
-  document.getElementById('gpu').textContent = `${Math.floor(20 + Math.random() * 5)}%`;
-  document.getElementById('cpu').textContent = `${Math.floor(35 + Math.random() * 5)}%`;
-}
-
 // Update waktu terakhir refresh setiap detik
 setInterval(updateLastUpdateTime, 1000);
-
-// Simulasi performance stats
-setInterval(updatePerformanceStats, 2000);
 
 // Inisialisasi
 fetchGrades();
 
-// Atur interval untuk mengambil data secara berkala setiap 10 detik
-setInterval(fetchGrades, 10000);
+// Atur interval untuk mengambil data secara berkala setiap 5 menit
+setInterval(fetchGrades, REFRESH_INTERVAL);
+
+// Tambahkan kemampuan refresh manual dengan klik pada ikon sync
+document.querySelector('.pulse-icon').addEventListener('click', () => {
+  fetchGrades();
+});

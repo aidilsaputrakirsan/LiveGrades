@@ -1,4 +1,4 @@
-/* Global Dark Theme with Animated Gradient Background */
+/* Modern Professional Dark Theme with Advanced Animations */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
 :root {
@@ -91,35 +91,6 @@ body::after {
   0% { transform: translate(0, 0) scale(1); opacity: 0.5; }
   50% { transform: translate(100px, 50px) scale(1.5); opacity: 0.3; }
   100% { transform: translate(50px, 100px) scale(1); opacity: 0.5; }
-}
-
-/* Performance Stats Bar */
-.performance-stats {
-  position: fixed;
-  top: 0;
-  right: 0;
-  background: rgba(15, 23, 42, 0.8);
-  backdrop-filter: blur(5px);
-  padding: 0.5rem 1rem;
-  border-bottom-left-radius: 0.5rem;
-  display: flex;
-  gap: var(--spacing-md);
-  font-size: 0.8rem;
-  color: var(--text-secondary);
-  z-index: 100;
-  border-left: 1px solid var(--border-color);
-  border-bottom: 1px solid var(--border-color);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.stat {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-xs);
-}
-
-.stat i {
-  color: var(--highlight);
 }
 
 /* Header Styles */
@@ -265,6 +236,12 @@ header h1 {
 .pulse-icon {
   color: var(--highlight);
   position: relative;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.pulse-icon:hover {
+  transform: rotate(180deg);
 }
 
 .pulse-icon.pulse-animation::after {
@@ -346,6 +323,19 @@ th {
   position: relative;
 }
 
+th.col-name {
+  text-align: left;
+  width: 20%;
+}
+
+th.col-sikap, th.col-tugas, th.col-uts, th.col-project {
+  width: 15%;
+}
+
+th.col-angka, th.col-huruf {
+  width: 10%;
+}
+
 th::after {
   content: '';
   position: absolute;
@@ -367,18 +357,6 @@ th .weight {
   font-weight: 400;
   color: var(--text-muted);
   font-size: 0.8rem;
-}
-
-/* Column widths */
-.col-name { 
-  width: 15%; 
-  text-align: left;
-}
-.col-sikap, .col-tugas, .col-uts, .col-project { 
-  width: 15%; 
-}
-.col-angka, .col-huruf { 
-  width: 10%; 
 }
 
 /* Table cells */
@@ -813,15 +791,6 @@ footer::before {
     font-size: 1.5rem;
   }
   
-  .performance-stats {
-    position: static;
-    border-radius: 0;
-    justify-content: center;
-    padding: var(--spacing-xs) var(--spacing-sm);
-    border: none;
-    background: var(--bg-secondary);
-  }
-  
   .data-status {
     flex-wrap: wrap;
     justify-content: center;
@@ -838,10 +807,6 @@ footer::before {
   .container {
     width: 95%;
     padding: var(--spacing-md) 0;
-  }
-  
-  .stat {
-    font-size: 0.7rem;
   }
   
   .grade-distribution {
