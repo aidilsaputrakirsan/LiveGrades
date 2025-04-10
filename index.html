@@ -36,32 +36,34 @@
       </div>
 
       <div class="table-container">
-        <table id="gradesTable">
-          <thead>
-            <tr>
-              <th>Nama Initial</th>
-              <th>Sikap &amp; Kehadiran <span class="weight">(20%)</span></th>
-              <th>Tugas <span class="weight">(50%)</span></th>
-              <th>UTS <span class="weight">(10%)</span></th>
-              <th>Final Project <span class="weight">(20%)</span></th>
-              <th>Nilai Angka</th>
-              <th>Nilai Huruf</th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- Data will be loaded dynamically -->
-            <tr class="loading-row">
-              <td colspan="7">
-                <div class="loading-animation">
-                  <div class="loading-circle"></div>
-                  <div class="loading-circle"></div>
-                  <div class="loading-circle"></div>
-                </div>
-                <div class="loading-text">Loading grades...</div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="table-responsive">
+          <table id="gradesTable">
+            <thead>
+              <tr>
+                <th>Nama Initial</th>
+                <th>Sikap &amp; Kehadiran <span class="weight">(20%)</span></th>
+                <th>Tugas <span class="weight">(50%)</span></th>
+                <th>UTS <span class="weight">(10%)</span></th>
+                <th>Final Project <span class="weight">(20%)</span></th>
+                <th>Nilai Angka</th>
+                <th>Nilai Huruf</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Data will be loaded dynamically -->
+              <tr class="loading-row">
+                <td colspan="7">
+                  <div class="loading-animation">
+                    <div class="loading-circle"></div>
+                    <div class="loading-circle"></div>
+                    <div class="loading-circle"></div>
+                  </div>
+                  <div class="loading-text">Loading grades...</div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
 
       <div class="grade-distribution">
