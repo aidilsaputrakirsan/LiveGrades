@@ -151,8 +151,8 @@ function updateTable(data) {
       <td class="component-cell">${tugasBar}</td>
       <td class="component-cell">${utsBar}</td>
       <td class="component-cell">${finalProjectBar}</td>
-      <td class="grade-numeric ${gradeClass}">${row.nilaiAngka}</td>
-      <td class="grade-letter ${gradeClass}">${row.nilaiHuruf}</td>
+      <td><div class="grade-numeric ${gradeClass}">${row.nilaiAngka}</div></td>
+      <td><div class="grade-letter ${gradeClass}">${row.nilaiHuruf}</div></td>
     `;
     tbody.appendChild(tr);
   });
